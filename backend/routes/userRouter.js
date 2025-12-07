@@ -7,6 +7,8 @@ const sendEmail = require("../lib/mailer");
 
 router.post("/users", async (req, res) => {
   const { name, email, password } = req.body;
+  console.log(email);
+  
 
   try {
     const existingUser = await User.findOne({ email });

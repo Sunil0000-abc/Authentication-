@@ -23,13 +23,13 @@ const OtpValidation = ({ email }) => {
   const verifyOtp = async () => {
     const otp = OTP.join("");
     try {
-      const response = await fetch("https://authentication-d6vh.vercel.app/verify-otp", {
+      const response = await fetch("https://authentication-d6vh.vercel.app/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
       });
+      console.log(response);
       const data = await response.json();
-
       if (response.ok) {
         setOtpStatus("success");
         window.location = "/login";
