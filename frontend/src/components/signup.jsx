@@ -27,7 +27,7 @@ const SignUp = () => {
 
   const createUser = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/auth/users", {
+      const response = await fetch("https://authentication-1-kgh1.onrender.com/auth/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
