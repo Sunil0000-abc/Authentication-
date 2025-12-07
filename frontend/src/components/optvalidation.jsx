@@ -23,7 +23,7 @@ const OtpValidation = ({ email }) => {
   const verifyOtp = async () => {
     const otp = OTP.join("");
     try {
-      const response = await fetch("https://authentication-lj9q.vercel.app/auth/verify-otp", {
+      const response = await fetch("https://authentication-d6vh.vercel.app/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
@@ -47,7 +47,7 @@ const OtpValidation = ({ email }) => {
   const handleResendOtp = async () => {
     setResendLoading(true);
     try {
-      const response = await fetch("https://authentication-lj9q.vercel.app/auth/resend-otp", {
+      const response = await fetch("https://authentication-d6vh.vercel.app/auth/resend-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

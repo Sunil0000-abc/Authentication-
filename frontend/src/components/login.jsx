@@ -12,7 +12,7 @@ const Login = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch("https://authentication-lj9q.vercel.app/auth/login", {
+      const response = await fetch("https://authentication-d6vh.vercel.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
