@@ -28,7 +28,7 @@ const SignUp = () => {
 
   const createUser = async (data) => {
     try {
-      const response = await fetch("https://authentication-d6vh.vercel.app/auth/users", {
+      const response = await fetch("https://authentication-n46c.vercel.app/auth/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
