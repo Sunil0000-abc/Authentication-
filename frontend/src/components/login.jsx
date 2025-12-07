@@ -32,6 +32,8 @@ const Login = () => {
     } catch (err) {
       console.error("Error logging in user:", err);
       setMessage("Server error. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +53,7 @@ const Login = () => {
 
     setLoading(true);
     await fetchUser();
-    setLoading(false);
+   
   };
 
   const handleChange = (e) => {
@@ -61,6 +63,7 @@ const Login = () => {
     if (value.trim() !== "") {
       setError((prev) => ({ ...prev, [name]: "" }));
     }
+    setMessage("");
   };
 
   return (

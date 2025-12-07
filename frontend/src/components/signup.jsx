@@ -23,6 +23,7 @@ const SignUp = () => {
     if (value.trim() !== "") {
       setError((prev) => ({ ...prev, [name]: "" }));
     }
+    setMessage("");
   };
 
   const createUser = async (data) => {
@@ -43,6 +44,8 @@ const SignUp = () => {
     } catch (err) {
       console.error("Error creating user:", err);
       setMessage("Server error. Try again.");
+    }finally {
+      setLoading(false);
     }
   };
 

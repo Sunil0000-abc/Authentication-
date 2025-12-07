@@ -53,8 +53,11 @@ const OtpValidation = ({ email }) => {
         body: JSON.stringify({ email }),
       });
       const data = await response.json();
+      console.log(data);
+      
       if (response.ok) {
         setMessage("OTP resent successfully!");
+        setOtpStatus(null);
         setResendTimer(30);
       } else {
         setMessage(data.message);
@@ -62,8 +65,11 @@ const OtpValidation = ({ email }) => {
     } catch (err) {
       setMessage("Server error. Try again.");
       console.log(err);
+    }finally{
+      setResendLoading(false);
+      setOtpStatus("success");
     }
-    setResendLoading(false);
+    
   };
 
   const handleChange = (i, e) => {
@@ -77,6 +83,8 @@ const OtpValidation = ({ email }) => {
     if (value && i < 3 && inputRef.current[i + 1]) {
       inputRef.current[i + 1].focus();
     }
+    setMessage("");
+    setOtpStatus(null);
   };
 
   const handleClick = (i) => {
@@ -119,17 +127,17 @@ const OtpValidation = ({ email }) => {
               onKeyDown={(e) => handleBackspace(e, i)}
               className={`w-12 h-12 mx-1 text-center text-2xl rounded-sm border outline-none 
               ${
-                otpStatus === "success"
+                otpStatus === "success" 
                   ? "border-green-500 ring-1"
-                  : otpStatus === "error"
-                  ? "border-red-500 ring-1"
+                  : otpStatus === "error" && message !== ""
+                  ? "border-red-500 ring-1 "
                   : "border-gray-300 focus:ring-1 focus:ring-black"
               }`}
             />
           ))}
         </div>
 
-        {message && <p className="text-red-500 text-sm mb-4">{message}</p>}
+        {message && <p className={`${otpStatus == "success" ?"text-green-400":"text-red-500"} text-sm mb-4`}>{message}</p>}
 
         <button
           type="submit"
