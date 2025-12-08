@@ -84,6 +84,7 @@ const SignUp = () => {
                 type="text"
                 name="name"
                 value={formData.name}
+                disabled={loading}
                 onChange={handleChange}
                 placeholder="Enter name"
                 className={`border p-2 rounded-md focus:outline-none focus:ring-1 ${
@@ -104,6 +105,7 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                disabled={loading}
                 placeholder="Enter email"
                 className={`border p-2 rounded-md focus:outline-none focus:ring-1 ${
                   error.email
@@ -125,8 +127,9 @@ const SignUp = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  disabled={loading}
                   placeholder="Enter password"
-                  className={`border p-2 pr-10 rounded-md w-full focus:outline-none focus:ring-1 ${
+                  className={`border p-2 pr-10 rounded-md w-full focus:outline-none focus:ring-1  ${
                     error.password
                       ? "border-red-500 ring-red-300"
                       : "border-gray-300 ring-black"

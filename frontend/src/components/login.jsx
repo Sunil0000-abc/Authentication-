@@ -83,6 +83,7 @@ const Login = () => {
               name="email"
               placeholder="Enter email"
               value={formData.email}
+              disabled={loading}
               onChange={handleChange}
               className={`border p-2 rounded-md focus:outline-none focus:ring-1 ${
                 error.email
@@ -104,6 +105,7 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                disabled={loading}
                 placeholder="Enter password"
                 className={`border p-2 pr-10 rounded-md w-full focus:outline-none focus:ring-1 ${
                   error.password

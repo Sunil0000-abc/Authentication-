@@ -22,6 +22,11 @@ const OtpValidation = ({ email }) => {
 
   const verifyOtp = async () => {
     const otp = OTP.join("");
+    if (otp.length < 4) {
+      setMessage("Please enter the complete OTP");
+      setOtpStatus("error");
+      return;
+    }
     try {
       const response = await fetch("https://authentication-n46c.vercel.app/auth/verify-otp", {
         method: "POST",
@@ -58,6 +63,7 @@ const OtpValidation = ({ email }) => {
       if (response.ok) {
         setMessage("OTP resent successfully!");
         setOtpStatus(null);
+        setOTP(["", "", "", ""]);
         setResendTimer(30);
       } else {
         setMessage(data.message);
@@ -72,7 +78,7 @@ const OtpValidation = ({ email }) => {
     
   };
 
-  const handleChange = (i, e) => {
+  const handleChange = async(i, e) => {
     const value = e.target.value;
     if (isNaN(value)) return;
 
@@ -83,9 +89,28 @@ const OtpValidation = ({ email }) => {
     if (value && i < 3 && inputRef.current[i + 1]) {
       inputRef.current[i + 1].focus();
     }
+
+    
     setMessage("");
     setOtpStatus(null);
   };
+
+  useEffect(() => {
+    const code = OTP.join("");
+    console.log("njsn");
+    
+    const autoverify = async () => {
+      if (code.length === 4) {
+        setLoading(true);
+        await verifyOtp();
+        setLoading(false);
+      } else {
+        setOtpStatus(null);
+      }
+    };
+
+    autoverify();
+  }, [OTP]);
 
   const handleClick = (i) => {
     const firstEmpty = OTP.indexOf("");
@@ -121,6 +146,7 @@ const OtpValidation = ({ email }) => {
               type="text"
               maxLength={1}
               value={itm}
+              disabled={loading}
               onChange={(e) => handleChange(i, e)}
               ref={(el) => (inputRef.current[i] = el)}
               onClick={() => handleClick(i)}
@@ -128,9 +154,9 @@ const OtpValidation = ({ email }) => {
               className={`w-12 h-12 mx-1 text-center text-2xl rounded-sm border outline-none 
               ${
                 otpStatus === "success" 
-                  ? "border-green-500 ring-1"
+                  ? "border-green-500 "
                   : otpStatus === "error" && message !== ""
-                  ? "border-red-500 ring-1 "
+                  ? "border-red-500  "
                   : "border-gray-300 focus:ring-1 focus:ring-black"
               }`}
             />
